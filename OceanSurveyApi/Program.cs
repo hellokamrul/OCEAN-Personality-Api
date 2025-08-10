@@ -7,21 +7,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", b =>
-        b.AllowAnyOrigin()
+         b.WithOrigins("https://ocean-personality.netlify.app")
          .AllowAnyHeader()
          .AllowAnyMethod());
 });
 
 var app = builder.Build();
 
-// ? remove HTTPS redirect (no cert / HTTP only)
-// app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors("AllowAll");
 app.UseAuthorization();
 
-// ? enable Swagger in Production too
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
